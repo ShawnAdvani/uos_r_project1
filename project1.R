@@ -9,50 +9,66 @@
 
 
 # Remember to load the tidyverse library
-
 library(tidyverse)
-library(glue)
+library(glue)  # add glue fro later function
 
 # load the data in the csv file into R (as a dataframe)
-
 df <- read.csv("data/anscombe.csv")
 
 # you can see the top of a large dataframe using the head command
-
 head(df)
 
 # you can look at a single column (also known as "indexing") by using the $ notation
-
 x1 <- df$x1
 
 # find the mean of one of the columns
-
 x1_mean <- mean(df$x1)
 
 # find the standard deviation of one of the columns
-
 x1_sd <- sd(df$x1)
 
 # find the correlation of one of the pairs
-
 cor_x1_y1 <- cor(df$x1, df$y1)
 
 # ADVANCED: find the mean and sd of ALL columns
-
 df %>% summarise(across(X:y4, mean))
 df %>% summarise(across(X:y4, sd))
 
 ## Now plot the data!
 
 # use ggplot to make a scatterplot
-
+# separate column names for x and y columns
 df_x <- c("x1","x2","x3","x4")
 df_y <- c("y1","y2","y3","y4")
 
-for (i in 1:4) {  # Loop through count of x and y values
-  ggplot(data = df, mapping = aes(x=df[,df_x[i]], y=df[,df_y[i]])) +
-    geom_point(color=df$X) +
-    labs(title = glue('{df_x[i]} by {df_y[i]}'))
+# Loop through count of x and y values
+for (i in 1:4) {  
+  x_label <- df_x[i]
+  y_label <- df_y[i]
+  x_values <- df[,x_label]
+  y_values <- df[,y_label]
+  
+  #ggplot based on iteration
+  ggplot(data = df, mapping = aes(x=x_values, y=y_values)) + 
+    
+    # add colour using index column X
+    geom_point(color=df$X) +  
+    
+    # add title using glue function and iteration
+    labs(title = glue('{x_label} by {y_label}'),   
+         
+         # add in appropriate x and y labels
+         x=df_x[i], y=df_y[i],  
+         
+         # glue mean, sd, and correlation into subtitle
+         subtitle = glue("Mean: x={mean(x_values)}, y={mean(df[,df_y[i]])}\
+                         Standard Deviation: x={sd(x_values)}, y={sd(y_values)}\
+                         Correlation: {cor(x_values, y_values)}")) +  
+    
+    # set xlim and ylim from 0 to axis max +1
+    xlim(0,max(df[,df_x[i]])+1) + ylim(0,max(df[,df_y[i]])+1) 
+  
+  save()
 }
 
 # hint: this will require two lines, one of which will involve the geom_point function
