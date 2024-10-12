@@ -10,7 +10,7 @@
 
 # Remember to load the tidyverse library
 library(tidyverse)
-library(glue)  # add glue fro later function
+library(glue)  # add glue for later function
 
 # load the data in the csv file into R (as a dataframe)
 df <- read.csv("data/anscombe.csv")
@@ -73,7 +73,8 @@ for (i in 1:4) {
     # set xlim and ylim from 0 to axis max +1
     xlim(0,max(df[,df_x[i]])+1) + ylim(0,max(df[,df_y[i]])+1) 
   
-  ggsave(glue("figs/{x_label}_{y_label}_graph.png"))
+  # save graph
+  ggsave(glue("figs/{x_label}_{y_label}_graph.png"), height = 1080, width = 1920, units = "px")
 }
 
 # hint: this will require two lines, one of which will involve the geom_point function
