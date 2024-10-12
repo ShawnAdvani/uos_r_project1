@@ -1,0 +1,13 @@
+The anscombe.csv data was obtained via the PSY6422 Data Analysis & Visualisation website and is assumed randomly produced or examples of different correlation types.
+https://tomstafford.github.io/psy6422/project-organisation.html
+
+Data
+X: index values. Data type integer (int)
+x1: graph 1 x values. Data type integer (int)
+x2: graph 2 x values. Data type integer (int)
+x3: graph 3 x values. Data type integer (int)
+y4: graph 4 x values. Data type integer (int)
+y1: graph 1 y values. Data type float (float)
+y2: graph 2 y values. Data type float (float)
+y3: graph 3 y values. Data type float (float)
+y4: graph 4 y values. Data type float (float)
