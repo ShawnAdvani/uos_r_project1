@@ -50,7 +50,7 @@ df_x <- c("x1","x2","x3","x4")
 df_y <- c("y1","y2","y3","y4")
 
 for (i in 1:4) {  # Loop through count of x and y values
-  ggplot(data = df, mapping = aes(x=df_x[i], y=df_y[i])) +
+  ggplot(data = df, mapping = aes(x=df[,df_x[i]], y=df[,df_y[i]])) +
     geom_point(color=df$X) +
     labs(title = glue('{df_x[i]} by {df_y[i]}'))
 }
