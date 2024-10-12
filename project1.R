@@ -63,15 +63,15 @@ for (i in 1:4) {
     labs(title = glue('{x_label} by {y_label}'),   
          
          # add in appropriate x and y labels
-         x=df_x[i], y=df_y[i],  
+         x=x_label, y=y_label,  
          
          # glue mean, sd, and correlation into subtitle
-         subtitle = glue("Mean: x={mean(x_values)}, y={mean(df[,df_y[i]])}\
+         subtitle = glue("Mean: x={mean(x_values)}, y={mean(y_values)}\
                          Standard Deviation: x={sd(x_values)}, y={sd(y_values)}\
                          Correlation: {cor(x_values, y_values)}")) +  
     
     # set xlim and ylim from 0 to axis max +1
-    xlim(0,max(df[,df_x[i]])+1) + ylim(0,max(df[,df_y[i]])+1) 
+    xlim(0,max(x_values)+1) + ylim(0,max(y_values)+1) 
   
   # save graph
   ggsave(glue("figs/{x_label}_{y_label}_graph.png"), height = 1080, width = 1920, units = "px")
