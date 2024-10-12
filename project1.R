@@ -43,16 +43,21 @@ df_y <- c("y1","y2","y3","y4")
 
 # Loop through count of x and y values
 for (i in 1:4) {  
+  
+  # assign labels and values to variables
   x_label <- df_x[i]
   y_label <- df_y[i]
   x_values <- df[,x_label]
   y_values <- df[,y_label]
   
-  #ggplot based on iteration
+  # ggplot based on iteration
   ggplot(data = df, mapping = aes(x=x_values, y=y_values)) + 
     
     # add colour using index column X
-    geom_point(color=df$X) +  
+    geom_point(color=df$X,
+               
+               # Increase size of points
+               size=3) +  
     
     # add title using glue function and iteration
     labs(title = glue('{x_label} by {y_label}'),   
@@ -68,7 +73,7 @@ for (i in 1:4) {
     # set xlim and ylim from 0 to axis max +1
     xlim(0,max(df[,df_x[i]])+1) + ylim(0,max(df[,df_y[i]])+1) 
   
-  save()
+  ggsave(glue("figs/{x_label}_{y_label}_graph.png"))
 }
 
 # hint: this will require two lines, one of which will involve the geom_point function
